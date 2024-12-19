@@ -3,7 +3,7 @@ using MyWebApi.Data;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<IItemRepository, ItemRepository>();
+builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
 
 builder.Services.AddControllers(); // Registers the controllers with the dependency injection container.
                                    // Adds support for MVC

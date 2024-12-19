@@ -3,10 +3,10 @@ using MyWebApi.Models;
 
 namespace MyWebApi.Data;
 
-public class ItemRepository : IItemRepository
+public class ItemsRepository : IItemsRepository
 {
     private List<Item> _items;
-    public ItemRepository()
+    public ItemsRepository()
     {
         _items = new List<Item>()
         {
@@ -16,7 +16,7 @@ public class ItemRepository : IItemRepository
         };
     }
 
-    public ItemRepository(List<Item> items)
+    public ItemsRepository(List<Item> items)
     {
         _items = items;
         if(_items == null)
@@ -36,6 +36,10 @@ public class ItemRepository : IItemRepository
             var maxId = GetMaxId();
             var newItem = new Item(maxId + 1
             , itemRequestModel.Name, itemRequestModel.Price, itemRequestModel.CreatedDate);
+            if(ItemAlreadyExists(newItem))
+            {
+                throw new ArgumentException("Item already exists");
+            }
             _items.Add(newItem);
         }
     }
@@ -78,4 +82,17 @@ public class ItemRepository : IItemRepository
         var maxId = _items.Any() ? _items.Max(i => i.Id) : 0;
         return maxId;
     }
+    public bool ItemAlreadyExists(Item item)
+    {
+        if (item == null)
+        {
+            throw new ArgumentNullException(nameof(item));
+        }
+        else
+        {
+            return _items.Any(i =>  i.Id == item.Id ||
+            i.Name == item.Name);
+        }
+    }
+
 }

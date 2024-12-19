@@ -3,7 +3,7 @@ using MyWebApi.Models;
 
 namespace MyWebApi.Data;
 
-public interface IItemRepository
+public interface IItemsRepository
 {
     void AddItem(ItemRequestModel item);
     void DeleteItem(int id);
@@ -11,5 +11,6 @@ public interface IItemRepository
     Item GetItem(int id);
     IEnumerable<Item> GetAllItems();
     int GetMaxId();
+    bool ItemAlreadyExists(Item item);
 }
 

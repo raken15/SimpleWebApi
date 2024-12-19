@@ -9,8 +9,8 @@ namespace MyWebApi.Controllers;
 [Route("api/[controller]")]
 public class ItemsController: ControllerBase
 {
-    private readonly IItemRepository _itemRepository;
-    public ItemsController(IItemRepository itemRepository) 
+    private readonly IItemsRepository _itemRepository;
+    public ItemsController(IItemsRepository itemRepository) 
     {
         _itemRepository = itemRepository;
     }
