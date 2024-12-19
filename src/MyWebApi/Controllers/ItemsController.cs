@@ -9,9 +9,9 @@ namespace MyWebApi.Controllers;
 public class ItemsController: ControllerBase
 {
     private readonly IItemRepository _itemRepository;
-    public ItemsController() 
+    public ItemsController(IItemRepository itemRepository) 
     {
-        _itemRepository = new ItemRepository();
+        _itemRepository = itemRepository;
     }
     [HttpGet]
     public IActionResult Get()
