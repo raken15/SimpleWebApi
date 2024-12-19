@@ -36,6 +36,7 @@ public class ItemRepository : IItemRepository
             var maxId = GetMaxId();
             var newItem = new Item(maxId + 1
             , itemRequestModel.Name, itemRequestModel.Price, itemRequestModel.CreatedDate);
+            _items.Add(newItem);
         }
     }
 
