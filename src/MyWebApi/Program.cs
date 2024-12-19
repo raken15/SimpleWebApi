@@ -1,44 +1,28 @@
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddControllers(); // Registers the controllers with the dependency injection container.
+                                   // Adds support for MVC
+                                   // Allows ASP.NET Core to know how to process incoming requests for controllers
+                                   // And allows me to create API endpoints.
 
-var app = builder.Build();
+// Add Swagger services
+builder.Services.AddEndpointsApiExplorer(); // Required for the endpoint API explorer, 
+                                            // for swagger to recognize endpoints and actions in controllers to document
+builder.Services.AddSwaggerGen(); // Registers Swagger generator to Services
+                                  // ASP.NET Core to generate the Swagger documentation, which will describe your API's routes, methods, parameters, and more.
 
+var app = builder.Build(); // The DI container is set up, and ASP.NET Core is ready to start the HTTP request pipeline
+
+// var url = app.Urls.FirstOrDefault() ?? "URL not found"; // Gets the first URL from the list
+// app.Logger.LogInformation("Application is running at: {Url}", url);
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwagger(); // This will generate Swagger JSON
+    app.UseSwaggerUI(); // This will serve the Swagger UI at /swagger
 }
 
-app.UseHttpsRedirection();
+app.UseHttpsRedirection(); // Enforces HTTPS
+app.MapControllers(); // Tell ASP.NET Core to map HTTP requests to the appropriate controller actions
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
-
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+app.Run(); // Starts the web application
