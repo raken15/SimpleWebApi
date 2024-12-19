@@ -10,29 +10,12 @@ public class ItemRepository : IItemRepository
     {
         _items = new List<Item>()
         {
-            new Item()
-            {
-                Id = 1,
-                Name = "Item 1",
-                Price = 10.99m,
-                CreatedDate = DateTime.Now
-            },
-            new Item()
-            {
-                Id = 2,
-                Name = "Item 2",
-                Price = 9.99m,
-                CreatedDate = DateTime.Now
-            },
-            new Item()
-            {
-                Id = 3,
-                Name = "Item 3",
-                Price = 5.99m,
-                CreatedDate = DateTime.Now
-            }
+            new Item(1, "Item 1", 10.99m, DateTime.Now),
+            new Item(2, "Item 2", 9.99m, DateTime.Now),
+            new Item(3, "Item 3", 5.99m, DateTime.Now)
         };
     }
+
     public ItemRepository(List<Item> items)
     {
         _items = items;
@@ -42,22 +25,17 @@ public class ItemRepository : IItemRepository
         }
     }
 
-    public void AddItem(Item item)
+    public void AddItem(ItemRequestModel itemRequestModel)
     {
-        if(item == null)
+        if(itemRequestModel == null)
         {
-            throw new ArgumentNullException(nameof(item));
+            throw new ArgumentNullException(nameof(itemRequestModel));
         }
         else
         {
-            if (!_items.Any(i => i.Id == item.Id))
-            {
-                _items.Add(item);
-            }
-            else
-            {
-                throw new ArgumentException("Key already exists", nameof(item.Id));
-            }
+            var maxId = GetMaxId();
+            var newItem = new Item(maxId + 1
+            , itemRequestModel.Name, itemRequestModel.Price, itemRequestModel.CreatedDate);
         }
     }
 
@@ -93,5 +71,10 @@ public class ItemRepository : IItemRepository
         {
             _items.Remove(itemToRemove);
         }
+    }
+    public int GetMaxId()
+    {
+        var maxId = _items.Any() ? _items.Max(i => i.Id) : 0;
+        return maxId;
     }
 }

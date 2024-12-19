@@ -38,12 +38,13 @@ public class ItemsController: ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] Item item)
+    public IActionResult Post([FromBody] ItemRequestModel itemRequestModel)
     {
         try
         {
-            _itemRepository.AddItem(item);
-            return CreatedAtRoute("GetItem", new { id = item.Id }, item);
+            _itemRepository.AddItem(itemRequestModel);
+            var maxId = _itemRepository.GetMaxId();
+            return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
         }
         catch (ArgumentNullException ex)
         {
