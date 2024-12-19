@@ -44,12 +44,31 @@ public class ItemRepository : IItemRepository
 
     public void AddItem(Item item)
     {
-        _items.Add(item);
+        if(item == null)
+        {
+            throw new ArgumentNullException(nameof(item));
+        }
+        else
+        {
+            if (!_items.Any(i => i.Id == item.Id))
+            {
+                _items.Add(item);
+            }
+            else
+            {
+                throw new ArgumentException("Key already exists", nameof(item.Id));
+            }
+        }
     }
 
-    public Item? GetItem(int id)
+    public Item GetItem(int id)
     {
-        return _items.Find(i => i.Id == id);
+        var item = _items.Find(i => i.Id == id);
+        if (item == null)
+        {
+            throw new KeyNotFoundException($"Item with id {id} does not exist");
+        }
+        return item;
     }
 
     public void UpdateItem(Item item)
@@ -59,6 +78,7 @@ public class ItemRepository : IItemRepository
         {
             existingItem.Name = item.Name;
             existingItem.Price = item.Price;
+            existingItem.CreatedDate = item.CreatedDate;
         }
     }
 
