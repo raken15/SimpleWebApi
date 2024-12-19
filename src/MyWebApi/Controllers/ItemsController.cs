@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Data;
 using MyWebApi.Models;
+using MyWebApi.ActionFilters;
 
 namespace MyWebApi.Controllers;
 
@@ -61,6 +62,7 @@ public class ItemsController: ControllerBase
     }
 
     [HttpPut("{id}")]
+    [Item_IdMatchesRouteFilter]
     public IActionResult Put(int id, [FromBody] Item item)
     {
         try
