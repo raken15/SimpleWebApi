@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Data;
 using MyWebApi.Models;
-using MyWebApi.ActionFilters;
+using MyWebApi.Filters.ActionFilters;
+using MyWebApi.Filters.ExceptionFilters;
 
 namespace MyWebApi.Controllers;
 
@@ -23,80 +24,32 @@ public class ItemsController: ControllerBase
     [HttpGet("{id}", Name = "GetItem")]
     public IActionResult GetItem(int id)
     {
-        try
-        {
-            var item = _itemRepository.GetItem(id);
-            return Ok(item);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "An unexpected error occurred. : " + ex.Message);
-        }
+        var item = _itemRepository.GetItem(id);
+        return Ok(item);
     }
 
     [HttpPost]
     public IActionResult Post([FromBody] ItemRequestModel itemRequestModel)
     {
-        try
-        {
-            _itemRepository.AddItem(itemRequestModel);
-            var maxId = _itemRepository.GetMaxId();
-            return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
-        }
-        catch (ArgumentNullException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (ArgumentException ex)
-        {
-            return BadRequest(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "An unexpected error occurred. : " + ex.Message);
-        }
+        _itemRepository.AddItem(itemRequestModel);
+        var maxId = _itemRepository.GetMaxId();
+        return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
     }
 
     [HttpPut("{id}")]
-    [Item_IdMatchesRouteFilter]
+    [Items_IdMatchesRouteFilter]
     public IActionResult Put(int id, [FromBody] Item item)
     {
-        try
-        {
-            var existingItem = _itemRepository.GetItem(id);
-            _itemRepository.UpdateItem(item);
-            return Ok(item);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "An unexpected error occurred. : " + ex.Message);
-        }
+        var existingItem = _itemRepository.GetItem(id);
+        _itemRepository.UpdateItem(item);
+        return Ok(item);
     }
 
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        try
-        {
-            var existingItem = _itemRepository.GetItem(id);
-            _itemRepository.DeleteItem(id);
-        }
-        catch (KeyNotFoundException ex)
-        {
-            return NotFound(ex.Message);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, "An unexpected error occurred. : " + ex.Message);
-        }
+        var existingItem = _itemRepository.GetItem(id);
+        _itemRepository.DeleteItem(id);
         return NoContent();
     }
 }

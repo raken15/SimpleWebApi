@@ -4,9 +4,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using MyWebApi.Models;
 
 
-namespace MyWebApi.ActionFilters;
+namespace MyWebApi.Filters.ActionFilters;
 
-public class Item_IdMatchesRouteFilterAttribute : ActionFilterAttribute
+public class Items_IdMatchesRouteFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
