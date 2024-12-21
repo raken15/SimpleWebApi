@@ -1,9 +1,20 @@
+using MyWebApi.Data;
+using MyWebApi.Filters.ExceptionFilters;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers(); // Registers the controllers with the dependency injection container.
-                                   // Adds support for MVC
-                                   // Allows ASP.NET Core to know how to process incoming requests for controllers
-                                   // And allows me to create API endpoints.
+// Add services to the container.
+builder.Services.AddSingleton<IItemsRepository, ItemsRepository>();
+
+/* Registers the controllers with the dependency injection container.
+Adds support for MVC
+Allows ASP.NET Core to know how to process incoming requests for controllers
+And allows me to create API endpoints. */
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<Items_ExceptionFilter>();
+});
+
 
 // Add Swagger services
 builder.Services.AddEndpointsApiExplorer(); // Required for the endpoint API explorer, 
