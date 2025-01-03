@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AC6A4E07-5A1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi", "src\MyWebApi\MyWebApi.csproj", "{8C7719CF-9125-44A4-8DCF-68DDBEBC4B0E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{D344CF11-4F8D-467C-B372-0F0A23EFEBBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.Tests", "tests\MyWebApi.Tests\MyWebApi.Tests.csproj", "{429E653E-07B4-4629-90DA-DA9EB649578D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,8 +24,13 @@ Global
 		{8C7719CF-9125-44A4-8DCF-68DDBEBC4B0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7719CF-9125-44A4-8DCF-68DDBEBC4B0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C7719CF-9125-44A4-8DCF-68DDBEBC4B0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{429E653E-07B4-4629-90DA-DA9EB649578D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{429E653E-07B4-4629-90DA-DA9EB649578D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{429E653E-07B4-4629-90DA-DA9EB649578D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{429E653E-07B4-4629-90DA-DA9EB649578D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8C7719CF-9125-44A4-8DCF-68DDBEBC4B0E} = {AC6A4E07-5A13-4B2E-BF1E-85BBB967CDC9}
+		{429E653E-07B4-4629-90DA-DA9EB649578D} = {D344CF11-4F8D-467C-B372-0F0A23EFEBBF}
 	EndGlobalSection
 EndGlobal
