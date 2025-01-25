@@ -4,7 +4,7 @@ using MyWebApi.Data;
 using MyWebApi.Models;
 using Moq;
 
-namespace MyWebApi.Tests;
+namespace MyWebApi.Tests.ControllerTests;
 
 public class ItemControllerTests
 {
