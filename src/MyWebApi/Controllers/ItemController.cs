@@ -2,16 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Data;
 using MyWebApi.Models;
 using MyWebApi.Filters.ActionFilters;
-using MyWebApi.Filters.ExceptionFilters;
 
 namespace MyWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ItemsController: ControllerBase
+public class ItemController: ControllerBase
 {
-    private readonly IItemsRepository _itemRepository;
-    public ItemsController(IItemsRepository itemRepository) 
+    private readonly IItemRepository _itemRepository;
+    public ItemController(IItemRepository itemRepository) 
     {
         _itemRepository = itemRepository;
     }
@@ -37,7 +36,7 @@ public class ItemsController: ControllerBase
     }
 
     [HttpPut("{id}")]
-    [Items_IdMatchesRouteFilter]
+    [Item_IdMatchesRouteFilter]
     public IActionResult Put(int id, [FromBody] Item item)
     {
         var existingItem = _itemRepository.GetItem(id);

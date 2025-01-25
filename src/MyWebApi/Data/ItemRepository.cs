@@ -2,7 +2,7 @@ using MyWebApi.Models;
 
 namespace MyWebApi.Data;
 
-public class ItemsRepository : IItemsRepository
+public class ItemsRepository : IItemRepository
 {
     private List<Item> _items;
     public ItemsRepository()

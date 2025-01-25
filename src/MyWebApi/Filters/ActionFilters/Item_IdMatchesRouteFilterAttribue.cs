@@ -6,7 +6,7 @@ using MyWebApi.Models;
 
 namespace MyWebApi.Filters.ActionFilters;
 
-public class Items_IdMatchesRouteFilterAttribute : ActionFilterAttribute
+public class Item_IdMatchesRouteFilterAttribute : ActionFilterAttribute
 {
     public override void OnActionExecuting(ActionExecutingContext context)
     {
