@@ -35,11 +35,10 @@ public class ItemController: ControllerBase
         return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut]
     [Item_IdMatchesRouteFilter]
-    public IActionResult Put(int id, [FromBody] Item item)
+    public IActionResult Put([FromBody] Item item)
     {
-        var existingItem = _itemRepository.GetItem(id);
         _itemRepository.UpdateItem(item);
         return Ok(item);
     }
