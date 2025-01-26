@@ -47,7 +47,6 @@ public class ItemController: ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var existingItem = _itemRepository.GetItem(id);
         _itemRepository.DeleteItem(id);
         return NoContent();
     }
