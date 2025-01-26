@@ -28,11 +28,11 @@ public class ItemController: ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] ItemRequestModel itemRequestModel)
+    public IActionResult Post([FromBody] Item item)
     {
-        _itemRepository.AddItem(itemRequestModel);
+        _itemRepository.AddItem(item);
         var maxId = _itemRepository.GetMaxId();
-        return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
+        return CreatedAtRoute("GetItem", new { id = maxId }, item);
     }
 
     [HttpPut]

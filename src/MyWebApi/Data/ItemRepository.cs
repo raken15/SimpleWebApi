@@ -24,17 +24,17 @@ public class ItemsRepository : IItemRepository
         }
     }
 
-    public void AddItem(ItemRequestModel itemRequestModel)
+    public void AddItem(Item item)
     {
-        if(itemRequestModel == null)
+        if(item == null)
         {
-            throw new ArgumentNullException(nameof(itemRequestModel));
+            throw new ArgumentNullException(nameof(item));
         }
         else
         {
             var maxId = GetMaxId();
             var newItem = new Item(maxId + 1
-            , itemRequestModel.Name, itemRequestModel.Price, itemRequestModel.CreatedDate);
+            , item.Name, item.Price, item.CreatedDate);
             if(ItemAlreadyExists(newItem))
             {
                 throw new ArgumentException("Item already exists");
