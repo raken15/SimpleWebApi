@@ -10,6 +10,6 @@ public interface IItemRepository
     Item GetItem(int id);
     IEnumerable<Item> GetAllItems();
     int GetMaxId();
-    bool ItemAlreadyExists(Item item);
+    bool IsItemAlreadyExists(Item item);
 }
 

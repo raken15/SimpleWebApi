@@ -1,4 +1,5 @@
 using MyWebApi.Data;
+using MyWebApi.Filters.ActionFilters;
 using MyWebApi.Filters.ExceptionFilters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,6 +13,7 @@ Allows ASP.NET Core to know how to process incoming requests for controllers
 And allows me to create API endpoints. */
 builder.Services.AddControllers(options =>
 {
+    options.Filters.Add<LogActionFilter>();
     options.Filters.Add<Item_ExceptionFilter>();
 });
 
