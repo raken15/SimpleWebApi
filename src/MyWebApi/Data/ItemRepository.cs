@@ -1,9 +1,8 @@
-using System;
 using MyWebApi.Models;
 
 namespace MyWebApi.Data;
 
-public class ItemsRepository : IItemsRepository
+public class ItemsRepository : IItemRepository
 {
     private List<Item> _items;
     public ItemsRepository()
@@ -25,22 +24,23 @@ public class ItemsRepository : IItemsRepository
         }
     }
 
-    public void AddItem(ItemRequestModel itemRequestModel)
+    public Item AddItem(Item item)
     {
-        if(itemRequestModel == null)
+        if(item == null)
         {
-            throw new ArgumentNullException(nameof(itemRequestModel));
+            throw new ArgumentNullException(nameof(item));
         }
         else
         {
             var maxId = GetMaxId();
             var newItem = new Item(maxId + 1
-            , itemRequestModel.Name, itemRequestModel.Price, itemRequestModel.CreatedDate);
+            , item.Name, item.Price, item.CreatedDate);
             if(ItemAlreadyExists(newItem))
             {
                 throw new ArgumentException("Item already exists");
             }
             _items.Add(newItem);
+            return newItem;
         }
     }
 

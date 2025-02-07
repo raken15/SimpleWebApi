@@ -1,10 +1,9 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace MyWebApi.Filters.ExceptionFilters;
 
-public class Items_ExceptionFilter : IExceptionFilter
+public class Item_ExceptionFilter : IExceptionFilter
 {
     public void OnException(ExceptionContext context)
     {

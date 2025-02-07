@@ -1,11 +1,10 @@
-using System;
 using MyWebApi.Models;
 
 namespace MyWebApi.Data;
 
-public interface IItemsRepository
+public interface IItemRepository
 {
-    void AddItem(ItemRequestModel item);
+    Item AddItem(Item item);
     void DeleteItem(int id);
     void UpdateItem(Item item);
     Item GetItem(int id);

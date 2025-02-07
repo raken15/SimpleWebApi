@@ -2,16 +2,15 @@ using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Data;
 using MyWebApi.Models;
 using MyWebApi.Filters.ActionFilters;
-using MyWebApi.Filters.ExceptionFilters;
 
 namespace MyWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class ItemsController: ControllerBase
+public class ItemController: ControllerBase
 {
-    private readonly IItemsRepository _itemRepository;
-    public ItemsController(IItemsRepository itemRepository) 
+    private readonly IItemRepository _itemRepository;
+    public ItemController(IItemRepository itemRepository) 
     {
         _itemRepository = itemRepository;
     }
@@ -29,18 +28,16 @@ public class ItemsController: ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] ItemRequestModel itemRequestModel)
+    public IActionResult Post([FromBody] Item item)
     {
-        _itemRepository.AddItem(itemRequestModel);
-        var maxId = _itemRepository.GetMaxId();
-        return CreatedAtRoute("GetItem", new { id = maxId }, itemRequestModel);
+        var newItem = _itemRepository.AddItem(item);
+        return CreatedAtRoute("GetItem", new { id = newItem.Id }, newItem);
     }
 
     [HttpPut("{id}")]
-    [Items_IdMatchesRouteFilter]
     public IActionResult Put(int id, [FromBody] Item item)
     {
-        var existingItem = _itemRepository.GetItem(id);
+        item.Id = id;
         _itemRepository.UpdateItem(item);
         return Ok(item);
     }
@@ -48,7 +45,6 @@ public class ItemsController: ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var existingItem = _itemRepository.GetItem(id);
         _itemRepository.DeleteItem(id);
         return NoContent();
     }
