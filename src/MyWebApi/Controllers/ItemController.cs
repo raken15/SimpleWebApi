@@ -30,15 +30,14 @@ public class ItemController: ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] Item item)
     {
-        _itemRepository.AddItem(item);
-        var maxId = _itemRepository.GetMaxId();
-        return CreatedAtRoute("GetItem", new { id = maxId }, item);
+        var newItem = _itemRepository.AddItem(item);
+        return CreatedAtRoute("GetItem", new { id = newItem.Id }, newItem);
     }
 
-    [HttpPut]
-    [Item_IdMatchesRouteFilter]
-    public IActionResult Put([FromBody] Item item)
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody] Item item)
     {
+        item.Id = id;
         _itemRepository.UpdateItem(item);
         return Ok(item);
     }
