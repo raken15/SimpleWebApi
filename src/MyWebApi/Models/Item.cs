@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace MyWebApi.Models;
 
-public class Item
+public class Item : IIdentifiable
 {
     [BindNever]
     public int Id { get; set; }
