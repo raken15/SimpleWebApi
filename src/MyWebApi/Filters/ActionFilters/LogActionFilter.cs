@@ -39,7 +39,7 @@ public class LogActionFilter : ActionFilterAttribute
         string controllerName = controllerActionDescriptor?.ControllerName ?? "UnknownController";
         string actionName = controllerActionDescriptor?.ActionName ?? "UnknownAction";
 
-        _logger.LogInformation($"[methodName] Controller: {controllerName}, Action: {actionName}");
+        _logger.LogInformation($"[{methodName}] Controller: {controllerName}, Action: {actionName}");
     }
 
 }
