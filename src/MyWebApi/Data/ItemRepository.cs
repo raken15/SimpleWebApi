@@ -35,7 +35,7 @@ public class ItemsRepository : IItemRepository
             var maxId = GetMaxId();
             var newItem = new Item(maxId + 1
             , item.Name, item.Price, item.CreatedDate);
-            if(ItemAlreadyExists(newItem))
+            if(IsItemAlreadyExists(newItem))
             {
                 throw new ArgumentException("Item already exists");
             }
@@ -82,7 +82,7 @@ public class ItemsRepository : IItemRepository
         var maxId = _items.Any() ? _items.Max(i => i.Id) : 0;
         return maxId;
     }
-    public bool ItemAlreadyExists(Item item)
+    public bool IsItemAlreadyExists(Item item)
     {
         if (item == null)
         {
