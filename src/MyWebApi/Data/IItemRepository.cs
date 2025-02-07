@@ -4,7 +4,7 @@ namespace MyWebApi.Data;
 
 public interface IItemRepository
 {
-    void AddItem(Item item);
+    Item AddItem(Item item);
     void DeleteItem(int id);
     void UpdateItem(Item item);
     Item GetItem(int id);

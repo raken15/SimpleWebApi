@@ -24,7 +24,7 @@ public class ItemsRepository : IItemRepository
         }
     }
 
-    public void AddItem(Item item)
+    public Item AddItem(Item item)
     {
         if(item == null)
         {
@@ -40,6 +40,7 @@ public class ItemsRepository : IItemRepository
                 throw new ArgumentException("Item already exists");
             }
             _items.Add(newItem);
+            return newItem;
         }
     }
 
