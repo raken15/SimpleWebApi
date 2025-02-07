@@ -71,7 +71,7 @@ public class ItemsRepository : IItemRepository
     }
     public void DeleteItem(int id)
     {
-        var itemToRemove = _items.Find(i => i.Id == id);
+        var itemToRemove = GetItem(id);
         if (itemToRemove != null)
         {
             _items.Remove(itemToRemove);
