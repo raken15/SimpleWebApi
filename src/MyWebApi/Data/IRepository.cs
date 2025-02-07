@@ -7,6 +7,6 @@ public interface IRepository<T> where T : class
     Task AddAsync(T entity);
     Task UpdateAsync(T entity);
     Task DeleteByIdAsync(int id);
-    Task<int> GetMaxId();
-    Task<bool> IsEntityAlreadyExists(T entity);
+    Task<int> GetMaxIdAsync();
+    Task<bool> IsEntityAlreadyExistsAsync(T entity);
 }
