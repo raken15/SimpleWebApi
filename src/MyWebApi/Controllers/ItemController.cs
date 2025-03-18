@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWebApi.Data;
 using MyWebApi.Models;
-using MyWebApi.Filters.ActionFilters;
 
 namespace MyWebApi.Controllers;
 
